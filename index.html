@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google" content="notranslate">
+
+  <title>Flappy Tours 2</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="css/estilos.min.css" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112934282-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-112934282-1', {'anonymize_ip': true });
+  </script>
+
+</head>
+
+<body>
+  <!-- Game container -->
+  <div id="gamediv" class="fullscreen"></div>
+
+  <!-- Loading overlay -->
+  <div id="loading" class="fullscreen flexvc txtblancosobrenegro txt5vh">
+      <img style="flex:unset;height:unset;" src="assets/imgs/logo.png" />
+      <p id="p_loading">Loading...</p>
+      <p id="p_carga"></p>
+  </div>
+
+  <!-- menu overlay -->
+  <div id="menu" class="fullscreen flexvc inithidden">
+  <!--<div id="userpanel" class="txtblancosobrenegro txt1em">
+  <span id="loggedas">unlogged</span><span id="rank">--</span>
+  </div>-->
+  <button id="trophy">🏆</button>
+      <img id="duck" class="centrado animacionUpDown" src="img/background-logo.png" />
+    <button id="btplay" class="btn">PLAY</button>
+    <div id="botonera" class="flexhc">
+      <button id="bthelp" class="btn btn-mini">Help</button>
+      <button id="btcredits" class="btn btn-mini">Credits</button>
+      <!--<button id="btlogin" class="btn btn-mini">login</button>
+      <button id="btregister" class="btn btn-mini">Register</button>
+      <button id="btlogout" class="btn btn-mini">Logout</button>-->
+    </div>
+  </div>
+
+  <!-- Ingame overlay -->
+  <div id="inGame" class="fullscreen inithidden">
+    <div class="fila1x">
+      <p id="score" class="centrado txtblancosobrenegro txt5vh">0</p>
+    </div>
+  </div>
+
+  <!-- Gameover overlay-->
+  <div id="gameOver" class="fullscreen flexvc animacionPopUp txtblancosobrenegro inithidden">
+      <p id="p_gameover" class="txtblancosobrenegro txt5vh">GAME OVER</p>
+      <p class="txtverdesobreblanco txt4vh">SCORE</p>
+      <p id="recuento" class="txt5vh"></p>
+      <p class="txtverdesobreblanco txt4vh">YOUR BEST</p>
+      <p id="bestscore" class="txt5vh"></p>
+      <p id="message" class="txtnegrosobreblanco txt4vh"></p>
+  </div>
+
+  <!-- HighScores overlay -->
+  <div id="highscores" class="fullscreen txtblancosobrenegro inithidden">    
+  </div>
+  <button id="hsback" class="btn btn-mini" style="display:none;">Back</button>
+
+  <!-- Credits overlay -->
+  <div id="credits" class="fullscreen flexvc inithidden" style="background-color:#00b698; text-align:center;">
+      <h2>DEVELOPED BY</h2>
+      <p>Juan Jos&eacute Capell&aacuten
+        <br/>soycape@hotmail.com
+        <br/>
+      </p>
+      <h2>ATTRIBUTIONS</h2>
+
+      <p>Backgroung music "Pleasant Creek" by Matthew Pablo.
+        <!--(<a href="https://opengameart.org/users/matthewpablo" target="_blank">Source</a>)-->
+        <br/> License:
+        <!--<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">-->CC-BY-3.0</p>
+      <p>Bird character (Flappy Duck sprite) by
+        <!--<a href="https://bevouliin.com/" target="_blank">-->bevouliin.com.
+        <br/> License:
+        <!--<a href="http://static.opengameart.org/OGA-BY-3.0.txt" target="_blank">-->OGA-BY-3.0</p>
+      <p>Powered by
+        <!--<a href="http://phaser.io" target="_blank">-->Phaser.io</p>
+  </div>
+
+  <!-- Register overlay -->
+  <div id="register" class="fullscreenflex inithidden">
+  <div id="regpanel" class="loginbox">    
+    <form id="regform" class="flexvc">
+      <h2>Register</h2>
+      <input id="reguser" class="clear" type="text" placeholder="Player name" name="user" size=20 maxlength=16 required>
+      <div style="width: 221px;height: 47px;">
+      <input id="regpass" class="clear" type="password" placeholder="Password" name="pass" maxlength=30 pattern=".{6,30}" title="Length between 6 and 30" required>
+      <span id="showpass" class="showpass">👁</span>    
+    </div>
+    <div style="margin: 10px 0 10px 0;">
+    <input type="checkbox" id="remember" checked name="remember"><label for="remember">Remember me</label></div>
+      <div>
+      <input type="submit" class="btn btn-mini" value="Submit">
+      <input id="btregcancel" type="button" class="btn btn-mini" value="Cancel">
+      </div>
+      <div id="regmessage" class="logmessage"></div>    
+    </form>
+  </div>
+</div>
+
+<!-- Login overlay -->
+  <div id="loginlayer" class="fullscreenflex inithidden">
+  <div id="login" class="loginbox">    
+    <form id="loginform" class="flexvc">
+      <h2>Login</h2>
+      <input id="loginuser" class="clear" type="text" placeholder="Player name" name="user" size=20 maxlength=16 required>
+      <div style="width: 221px;height: 47px;">
+      <input id="loginpass" class="clear" type="password" placeholder="Password" name="pass" maxlength=30 required>
+      <span id="showloginpass" class="showpass">👁</span>    
+    </div>
+    <div style="margin: 10px 0 10px 0;">
+    <input type="checkbox" id="loginremember" checked name="remember"><label for="remember">Remember me</label></div>
+      <div>
+      <input type="submit" class="btn btn-mini" value="Submit">
+      <input id="btlogincancel" type="button" class="btn btn-mini" value="Cancel">
+      </div>
+      <div id="loginmessage" class="logmessage"></div>
+    </form>
+  </div>
+</div>
+
+  <!-- Help overlay -->
+  <div id="help" class="fullscreen flexvc inithidden">      
+      <h2 id="title_instrucciones" class="txtblancosobrenegro txt5vh">HOW TO PLAY</h2>
+      <p id="instrucciones">Help Flappy avoid the obstacles. How far can you go?</p>
+      <img src="img\ayudaflappy.png" />
+  </div>
+  <script src="js/libs/phaser-arcade321.js"></script>
+  <script src="js/prefabs/helpers.js"></script>
+  <script src="js/scenes/loadscreen.js"></script>
+  <script src="js/scenes/menu.js"></script>
+  <script src="js/scenes/ingame.js"></script>
+  <script src="js/scenes/gameover.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
