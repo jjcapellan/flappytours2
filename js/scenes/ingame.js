@@ -71,15 +71,16 @@ class InGame extends Phaser.Scene {
 
         // Background
         t.add.image(0, 0, t.gbs.key_atlas, 'layer1').setOrigin(0, 0);
+        
         //Mountains scrolling layer
         let mountainsY = t.game.config.height - t.groundHeight - t.mountainsHeight + 10;
         t.mountains = new ScrollingLayer(t, mountainsY, t.mountainsSpeed, 2, t.gbs.key_atlas, 'layer2');
-        t.mountains.setOrigin(0,0);
+
         // Pipes group
         t.pipes = t.generatePipes();
+
         // ForeGround scrolling layer
         t.ground = new ScrollingLayer(t, t.height - t.groundHeight, t.groundSpeed, 2, t.gbs.key_atlas, 'layer3');
-        t.ground.setOrigin(0,0);
 
         // Bird
         t.bird = t.physics.add.sprite(100, t.height / 2, t.gbs.key_atlas, 'pato1');
