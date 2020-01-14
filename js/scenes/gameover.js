@@ -21,7 +21,7 @@ class GameOver extends Phaser.Scene {
         }
 
         if (Number.isNaN(t.gbs.topScore)) t.gbs.topScore = 0;
-        document.getElementById('recuento').innerHTML = txt_score;
+        document.getElementById('recount').innerHTML = txt_score;
         document.getElementById('bestscore').innerHTML = t.gbs.topScore;
         t.input.on('pointerdown', () => {
             helpers.hide('gameOver');

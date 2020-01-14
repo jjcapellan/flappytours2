@@ -37,7 +37,7 @@ class LoadScreen extends Phaser.Scene {
     }
 
     updateLoad(progress){
-        document.getElementById('p_carga').innerHTML = `${Math.round(progress * 100)}%`;
+        document.getElementById('p_load').innerHTML = `${Math.round(progress * 100)}%`;
     }
   
   }
