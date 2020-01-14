@@ -54,17 +54,11 @@ class ScrollingLayer {
 
     init() {
         let t = this;
+        t.width = t.scene.textures.getFrame(t.texture, t.frame).width;
+        t.blitter = t.scene.add.blitter(0, t.y, t.texture, t.frame);
         t.x = 0;
-        t.img1 = t.scene.add.image(t.x, t.y, t.texture, t.frame);
-        t.img2 = t.scene.add.image(t.img1.width - t.overlap, t.y, t.texture, t.frame);
-    }
-
-    setOrigin(x = 0.5, y) {
-        if (y == undefined) {
-            y = x;
-        }
-        this.img1.setOrigin(x, y);
-        this.img2.setOrigin(x, y);
+        t.img1 = t.blitter.create(t.x,0);
+        t.img2 = t.blitter.create(t.width - t.overlap, 0);
     }
 
     getDistance(speed, deltaTime) {
@@ -80,11 +74,11 @@ class ScrollingLayer {
         let t = this;
         t.img1.x += t.getDistance(t.speed, delta);
         t.img2.x += t.getDistance(t.speed, delta);
-        if (t.img1.x < -t.img1.width) {
-            t.img1.x = t.img1.width + t.img2.x - t.overlap;
+        if (t.img1.x < -t.width) {
+            t.img1.x = t.width + t.img2.x - t.overlap;
         }
-        if (t.img2.x < -t.img2.width) {
-            t.img2.x = t.img1.width + t.img1.x - t.overlap;
+        if (t.img2.x < -t.width) {
+            t.img2.x = t.width + t.img1.x - t.overlap;
         }
     }
     
@@ -285,15 +279,13 @@ class InGame extends Phaser.Scene {
         t.add.image(0, 0, t.gbs.key_atlas, 'layer1').setOrigin(0, 0);
         //Mountains scrolling layer
         let mountainsY = t.game.config.height - t.groundHeight - t.mountainsHeight + 10;
-        /*t.mountains1 = t.add.image(0, mountainsY, t.gbs.key_atlas, 'layer2').setOrigin(0, 0);
-        t.mountains2 = t.add.image(t.mountains1.width - 2, mountainsY, t.gbs.key_atlas, 'layer2').setOrigin(0, 0);*/
         t.mountains = new ScrollingLayer(t, mountainsY, t.mountainsSpeed, 2, t.gbs.key_atlas, 'layer2');
-        t.mountains.setOrigin(0,0);
+        //t.mountains.setOrigin(0,0);
         // Pipes group
         t.pipes = t.generatePipes();
         // ForeGround scrolling layer
         t.ground = new ScrollingLayer(t, t.height - t.groundHeight, t.groundSpeed, 2, t.gbs.key_atlas, 'layer3');
-        t.ground.setOrigin(0,0);
+        //t.ground.setOrigin(0,0);
 
         // Bird
         t.bird = t.physics.add.sprite(100, t.height / 2, t.gbs.key_atlas, 'pato1');
@@ -329,32 +321,11 @@ class InGame extends Phaser.Scene {
         }
         // parallax positions
         if (!t.birdCollided) {
-            /*t.mountains1.x += t.getDistance(t.mountainsSpeed, delta);
-            t.mountains2.x += t.getDistance(t.mountainsSpeed, delta);
-            if (t.mountains1.x < -t.mountains1.width) {
-                t.mountains1.x = t.mountains1.width + t.mountains2.x - 2;
-            }
-            if (t.mountains2.x < -t.mountains2.width) {
-                t.mountains2.x = t.mountains1.width + t.mountains1.x - 2;
-            }*/
             t.mountains.update(delta);
             t.ground.update(delta);
-
-            /*t.ground1.x += t.getDistance(t.groundSpeed, delta);
-            t.ground2.x += t.getDistance(t.groundSpeed, delta);
-            if (t.ground1.x < -t.ground1.width) {
-                t.ground1.x = t.ground1.width + t.ground2.x - 2;
-            }
-            if (t.ground2.x < -t.ground2.width) {
-                t.ground2.x = t.ground1.width + t.ground1.x - 2;
-            }*/
         }
 
         t.checkPipes();
-    }
-
-    getDistance(pixelsSecond, deltaTime) {
-        return (deltaTime * pixelsSecond) / 1000;
     }
 
     generateAnimations() {
@@ -537,10 +508,7 @@ class GameOver extends Phaser.Scene {
 }
 function runGame(width, height) {
     var config = {
-      type: Phaser.CANVAS,
-      /*render:{
-        pixelArt: true
-      },*/
+      type: Phaser.AUTO,
       width: width,
       height: height,
       parent: 'gamediv',
