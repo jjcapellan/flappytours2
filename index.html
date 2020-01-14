@@ -38,18 +38,13 @@
 
   <!-- menu overlay -->
   <div id="menu" class="fullscreen flexvc inithidden">
-  <!--<div id="userpanel" class="txtblancosobrenegro txt1em">
-  <span id="loggedas">unlogged</span><span id="rank">--</span>
-  </div>-->
-  <button id="trophy">🏆</button>
+
+  <button id="trophy">🏆</button> <!-- For future leader board-->
       <img id="duck" class="centrado animacionUpDown" src="img/background-logo.png" />
     <button id="btplay" class="btn">PLAY</button>
     <div id="botonera" class="flexhc">
       <button id="bthelp" class="btn btn-mini">Help</button>
       <button id="btcredits" class="btn btn-mini">Credits</button>
-      <!--<button id="btlogin" class="btn btn-mini">login</button>
-      <button id="btregister" class="btn btn-mini">Register</button>
-      <button id="btlogout" class="btn btn-mini">Logout</button>-->
     </div>
   </div>
 
@@ -69,11 +64,6 @@
       <p id="bestscore" class="txt5vh"></p>
       <p id="message" class="txtnegrosobreblanco txt4vh"></p>
   </div>
-
-  <!-- HighScores overlay -->
-  <div id="highscores" class="fullscreen txtblancosobrenegro inithidden">    
-  </div>
-  <button id="hsback" class="btn btn-mini" style="display:none;">Back</button>
 
   <!-- Credits overlay -->
   <div id="credits" class="fullscreen flexvc inithidden" style="background-color:#00b698; text-align:center;">
@@ -95,48 +85,6 @@
       <p>Powered by
         <!--<a href="http://phaser.io" target="_blank">-->Phaser.io</p>
   </div>
-
-  <!-- Register overlay -->
-  <div id="register" class="fullscreenflex inithidden">
-  <div id="regpanel" class="loginbox">    
-    <form id="regform" class="flexvc">
-      <h2>Register</h2>
-      <input id="reguser" class="clear" type="text" placeholder="Player name" name="user" size=20 maxlength=16 required>
-      <div style="width: 221px;height: 47px;">
-      <input id="regpass" class="clear" type="password" placeholder="Password" name="pass" maxlength=30 pattern=".{6,30}" title="Length between 6 and 30" required>
-      <span id="showpass" class="showpass">👁</span>    
-    </div>
-    <div style="margin: 10px 0 10px 0;">
-    <input type="checkbox" id="remember" checked name="remember"><label for="remember">Remember me</label></div>
-      <div>
-      <input type="submit" class="btn btn-mini" value="Submit">
-      <input id="btregcancel" type="button" class="btn btn-mini" value="Cancel">
-      </div>
-      <div id="regmessage" class="logmessage"></div>    
-    </form>
-  </div>
-</div>
-
-<!-- Login overlay -->
-  <div id="loginlayer" class="fullscreenflex inithidden">
-  <div id="login" class="loginbox">    
-    <form id="loginform" class="flexvc">
-      <h2>Login</h2>
-      <input id="loginuser" class="clear" type="text" placeholder="Player name" name="user" size=20 maxlength=16 required>
-      <div style="width: 221px;height: 47px;">
-      <input id="loginpass" class="clear" type="password" placeholder="Password" name="pass" maxlength=30 required>
-      <span id="showloginpass" class="showpass">👁</span>    
-    </div>
-    <div style="margin: 10px 0 10px 0;">
-    <input type="checkbox" id="loginremember" checked name="remember"><label for="remember">Remember me</label></div>
-      <div>
-      <input type="submit" class="btn btn-mini" value="Submit">
-      <input id="btlogincancel" type="button" class="btn btn-mini" value="Cancel">
-      </div>
-      <div id="loginmessage" class="logmessage"></div>
-    </form>
-  </div>
-</div>
 
 <!-- Help overlay -->
   <div id="help" class="fullscreen flexvc inithidden">      
