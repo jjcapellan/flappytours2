@@ -1,7 +1,7 @@
 # Flappy Tours 2
 Game based on the original idea of the famous Flappy Bird.  
 This game was made with [Phaser 3](https://github.com/photonstorm/phaser).
-Try it here: https://jjcapellan.github.io/FlappyTours2/
+Try it here: https://jjcapellan.github.io/flappytours2/
 
 ## How to play
 Click or tap screen to fly and avoid hitting the pipes.  
