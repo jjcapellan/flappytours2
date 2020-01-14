@@ -1,13 +1,14 @@
 function runGame(width, height) {
     var config = {
-      type: Phaser.AUTO,
+      type: Phaser.CANVAS,
       width: width,
       height: height,
       parent: 'gamediv',
       backgroundColor: 0x000000,
       scale: {
         mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        autoRound: true
       },
       physics: {
         default: 'arcade',
