@@ -4,17 +4,25 @@ class Menu extends Phaser.Scene {
     }
 
     init(){
-        this.gbs = this.registry.get('globals');
+        let t = this;
+        t.gbs = this.registry.get('globals');
+
+        // DOM elements
+        t.btplay = document.getElementById("btplay");
+        t.bthelp = document.getElementById("bthelp");
+        t.btcredits = document.getElementById("btcredits");
+        t.lycredits = document.getElementById("credits");
+        t.lyhelp = document.getElementById('help');
     }
   
     create(){
         let t = this;
         // DOM listeners
-        document.getElementById("btplay").onclick = this.playButton.bind(t);
-        document.getElementById("bthelp").onclick = this.helpButton;
-        document.getElementById("btcredits").onclick = this.creditsButton;
-        document.getElementById("credits").onclick = this.closeCredits;
-        document.getElementById('help').onclick = this.closeHelp;
+        t.btplay.onclick = this.playButton.bind(t);
+        t.bthelp.onclick = this.helpButton;
+        t.btcredits.onclick = this.creditsButton;
+        t.lycredits.onclick = this.closeCredits;
+        t.lyhelp.onclick = this.closeHelp;
 
         // Sky
         this.add.image(0,0,t.gbs.key_atlas, 'layer1').setOrigin(0,0);
@@ -39,6 +47,7 @@ class Menu extends Phaser.Scene {
 
     // Buttons handlers
     playButton() {
+        this.removeListeners();
         helpers.hide('menu');
         this.scene.start('inGame');        
     } 
@@ -57,5 +66,14 @@ class Menu extends Phaser.Scene {
 
     closeHelp(){
         helpers.hide('help');
+    }
+
+    removeListeners(){
+        let t = this;
+        t.btplay.removeEventListener('click', t.playButton);
+        t.bthelp.removeEventListener('click', t.helpButton);
+        t.btcredits.removeEventListener('click', t.creditsButton);
+        t.lycredits.removeEventListener('click', t.closeCredits);
+        t.lyhelp.removeEventListener('click', t.closeHelp);
     }
   }
