@@ -22,17 +22,11 @@ class ScrollingLayer {
 
     init() {
         let t = this;
+        t.width = t.scene.textures.getFrame(t.texture, t.frame).width;
+        t.blitter = t.scene.add.blitter(0, t.y, t.texture, t.frame);
         t.x = 0;
-        t.img1 = t.scene.add.image(t.x, t.y, t.texture, t.frame);
-        t.img2 = t.scene.add.image(t.img1.width - t.overlap, t.y, t.texture, t.frame);
-    }
-
-    setOrigin(x = 0.5, y) {
-        if (y == undefined) {
-            y = x;
-        }
-        this.img1.setOrigin(x, y);
-        this.img2.setOrigin(x, y);
+        t.img1 = t.blitter.create(t.x,0);
+        t.img2 = t.blitter.create(t.width - t.overlap, 0);
     }
 
     getDistance(speed, deltaTime) {
@@ -48,11 +42,11 @@ class ScrollingLayer {
         let t = this;
         t.img1.x += t.getDistance(t.speed, delta);
         t.img2.x += t.getDistance(t.speed, delta);
-        if (t.img1.x < -t.img1.width) {
-            t.img1.x = t.img1.width + t.img2.x - t.overlap;
+        if (t.img1.x < -t.width) {
+            t.img1.x = t.width + t.img2.x - t.overlap;
         }
-        if (t.img2.x < -t.img2.width) {
-            t.img2.x = t.img1.width + t.img1.x - t.overlap;
+        if (t.img2.x < -t.width) {
+            t.img2.x = t.width + t.img1.x - t.overlap;
         }
     }
     
