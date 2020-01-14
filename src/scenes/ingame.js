@@ -99,13 +99,13 @@ class InGame extends Phaser.Scene {
         document.getElementById('inGame').style.display = 'block';
 
         // Debug performance
-        let timedEvent = t.time.addEvent({ delay: 1000, callback: t.printFps, callbackScope: t, loop: true });
+        //let timedEvent = t.time.addEvent({ delay: 1000, callback: t.printFps, callbackScope: t, loop: true });
 
     }
 
-    printFps(){
+    /*printFps(){
         console.log(this.game.loop.actualFps);
-    }
+    }*/
 
     update(time, delta) {
         let t = this;
