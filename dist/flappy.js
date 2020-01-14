@@ -277,7 +277,7 @@ class InGame extends Phaser.Scene {
 
         // Background
         t.add.image(0, 0, t.gbs.key_atlas, 'layer1').setOrigin(0, 0);
-        
+
         //Mountains scrolling layer
         let mountainsY = t.game.config.height - t.groundHeight - t.mountainsHeight + 10;
         t.mountains = new ScrollingLayer(t, mountainsY, t.mountainsSpeed, 2, t.gbs.key_atlas, 'layer2');
@@ -414,7 +414,7 @@ class InGame extends Phaser.Scene {
 
                 item.body.setVelocityX(t.pipeSpeed);
             } else {
-                if (item.x < (t.bird.x - item.width) && !t.birdHasScored) {
+                if (item.body.right < t.bird.body.left/*(t.bird.x - item.width)*/ && !t.birdHasScored) {
                     //Save score
                     t.snd_point.play();
                     t.score++;
