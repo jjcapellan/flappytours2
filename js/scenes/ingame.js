@@ -20,7 +20,7 @@ class InGame extends Phaser.Scene {
         /* and when they leave the screen it is reset to false. All in the checkPipes() method. */
         t.birdHasScored = false;
         // Vertical velocity of the bird in the click event
-        t.birdImpulse = -350;    
+        t.birdImpulse = -350;
 
         // Pipes with
         t.pipeWidth = t.textures.getFrame(t.gbs.key_atlas, 'tuberia').width;
@@ -33,7 +33,7 @@ class InGame extends Phaser.Scene {
         // Position X for a new pair of pipes
         t.posXNewPipe = (t.pairsOfPipes - 1) * (t.pipeDistance + t.pipeWidth) + t.pipeDistance;
         // Initial vertical space between pipes
-        t.pipesGap = Math.round(t.height*0.409);
+        t.pipesGap = Math.round(t.height * 0.409);
 
         // Height of the background sprite that represents the ground
         t.groundHeight = t.textures.getFrame(t.gbs.key_atlas, 'layer3').height;
@@ -41,7 +41,10 @@ class InGame extends Phaser.Scene {
         t.mountainsHeight = t.textures.getFrame(t.gbs.key_atlas, 'layer2').height;
         // For Parallax effect
         t.mountainsSpeed = -10;
-        
+        t.groundSpeed = Math.round(t.pipeSpeed * 1.06);
+
+        t.scoreDOM = document.getElementById('score');
+
     }
 
     create() {
@@ -65,23 +68,19 @@ class InGame extends Phaser.Scene {
 
         // Animations
         t.generateAnimations();
-        
+
         // Background
         t.add.image(0, 0, t.gbs.key_atlas, 'layer1').setOrigin(0, 0);
-        //Mountains
-        t.mountains = t.add.tileSprite(0, 0, t.width, t.mountainsHeight, t.gbs.key_atlas, 'layer2')
-            .setOrigin(0, 0)
-            .setY(t.game.config.height - t.groundHeight - t.mountainsHeight + 10);
+        //Mountains scrolling layer
+        let mountainsY = t.game.config.height - t.groundHeight - t.mountainsHeight + 10;
+        t.mountains = new ScrollingLayer(t, mountainsY, t.mountainsSpeed, 2, t.gbs.key_atlas, 'layer2');
+        t.mountains.setOrigin(0,0);
         // Pipes group
         t.pipes = t.generatePipes();
-        // ForeGround
-        t.ground = t.add.tileSprite(
-            0,
-            t.height - t.groundHeight,
-            t.width, t.groundHeight,
-            t.gbs.key_atlas,
-            'layer3')
-            .setOrigin(0, 0);
+        // ForeGround scrolling layer
+        t.ground = new ScrollingLayer(t, t.height - t.groundHeight, t.groundSpeed, 2, t.gbs.key_atlas, 'layer3');
+        t.ground.setOrigin(0,0);
+
         // Bird
         t.bird = t.physics.add.sprite(100, t.height / 2, t.gbs.key_atlas, 'pato1');
         t.bird.play('flapping');
@@ -95,9 +94,16 @@ class InGame extends Phaser.Scene {
         t.input.on('pointerdown', t.flap, t);
 
         // Shows actual scene DOM UI
-        document.getElementById('score').innerHTML = '0';
+        t.scoreDOM.innerHTML = '0';
         document.getElementById('inGame').style.display = 'block';
 
+        // Debug performance
+        let timedEvent = t.time.addEvent({ delay: 1000, callback: t.printFps, callbackScope: t, loop: true });
+
+    }
+
+    printFps(){
+        console.log(this.game.loop.actualFps);
     }
 
     update(time, delta) {
@@ -108,16 +114,12 @@ class InGame extends Phaser.Scene {
             t.bird.angle += 1;
         }
         // parallax positions
-        if(!t.birdCollided ){
-        t.mountains.tilePositionX -= t.getDistance(t.mountainsSpeed, delta);
-        t.ground.tilePositionX -= t.getDistance(t.pipeSpeed, delta);
+        if (!t.birdCollided) {
+            t.mountains.update(delta);
+            t.ground.update(delta);
         }
 
         t.checkPipes();
-    }
-
-    getDistance(pixelsSecond, deltaTime) {
-        return (deltaTime * pixelsSecond) / 1000;
     }
 
     generateAnimations() {
@@ -146,7 +148,7 @@ class InGame extends Phaser.Scene {
             collideWorldBounds: false,
             velocityX: t.pipeSpeed,
             gravityY: 0
-        }); 
+        });
 
         // Adding elements to pipes group
         for (let i = 0; i < t.pairsOfPipes; i++) {
@@ -191,7 +193,7 @@ class InGame extends Phaser.Scene {
 
         t.pipes.getChildren().forEach(function (item) {
             if (item.body.x < (-t.pipeWidth)) {
-                let gapFactor = (t.score < 41)? (0.4043 - 0.004358 * t.score) : 0.21;
+                let gapFactor = (t.score < 41) ? (0.4043 - 0.004358 * t.score) : 0.21;
                 let newGap = gapFactor * t.height;
                 if (item.isUpper) {
                     ceilingPipeY = Math.round(-(175 * t.height / 600) + Math.random() * (320 * t.height / 600));
@@ -209,7 +211,7 @@ class InGame extends Phaser.Scene {
                     //Save score
                     t.snd_point.play();
                     t.score++;
-                    document.getElementById('score').innerHTML = t.score;
+                    t.scoreDOM.innerHTML = t.score;
                     t.birdHasScored = true;
                 }
             }
@@ -247,7 +249,7 @@ class InGame extends Phaser.Scene {
         t.cameras.main.shake(200, 0.03);
         t.gbs.scorePreviousGame = this.score;
         this.checkRecord();
-        setTimeout(()=>{
+        setTimeout(() => {
             helpers.hide('inGame');
             t.pipes.setVisible(false);
             t.scene.pause();
