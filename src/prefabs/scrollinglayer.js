@@ -1,20 +1,21 @@
 class ScrollingLayer {
     /**
      *Creates an instance of ScrollingLayer.
-     * @param {Phaser.Scene} scene
-     * @param {number} y - vertical position in pixels
-     * @param {number} speedX - Horizontal speed in pixels/second
-     * @param {number} overlapX - Horizontal overlap in pixels. Prevents empty spaces between images.
+     * @param {Phaser.Scene} scene     
+     * @param {number} speed - Horizontal speed in pixels/second.    
      * @param {string} texture - Key of the texture stored in cache.
-     * @param {string} [frame] - Optional frame of the texture.
+     * @param {object} [options]
+     * @param {string} [options.frame] - Optional frame of the texture.
+     * @param {number} [options.y] - vertical position in pixels. By default the texture is positioned at bottom.
+     * @param {number} [options.overlap = 1] - Horizontal overlap in pixels (default 1). Prevents empty spaces between images.
      * @memberof ScrollingLayer
      */
-    constructor(scene, y, speedX, overlapX, texture, frame) {
+    constructor(scene, speed, texture, {frame = null, y = null, overlap = 1} = {}) {
         let t = this;
         t.scene = scene;
         t.y = y;
-        t.speed = speedX;
-        t.overlap = overlapX;
+        t.speed = speed;
+        t.overlap = overlap;
         t.texture = texture;
         t.frame = frame;
         t.init();
@@ -23,14 +24,21 @@ class ScrollingLayer {
     init() {
         let t = this;
         t.width = t.scene.textures.getFrame(t.texture, t.frame).width;
+        t.height = t.scene.textures.getFrame(t.texture, t.frame).height;
+        if(t.y == null){
+            t.setYbottom();
+        }
         t.blitter = t.scene.add.blitter(0, t.y, t.texture, t.frame);
-        t.x = 0;
-        t.img1 = t.blitter.create(t.x,0);
+        t.img1 = t.blitter.create(0,0);
         t.img2 = t.blitter.create(t.width - t.overlap, 0);
     }
 
     getDistance(speed, deltaTime) {
         return (deltaTime * speed) / 1000;
+    }
+
+    setYbottom(){
+        this.y = this.scene.game.config.height - this.height;
     }
 
     /**
