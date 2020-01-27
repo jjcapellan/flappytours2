@@ -314,6 +314,8 @@ class InGame extends Phaser.Scene {
         t.scoreDOM.innerHTML = '0';
         document.getElementById('inGame').style.display = 'block';
 
+        t.physics.world.pause();
+
         // Debug performance
         //let timedEvent = t.time.addEvent({ delay: 1000, callback: t.printFps, callbackScope: t, loop: true });
 
@@ -326,6 +328,9 @@ class InGame extends Phaser.Scene {
     update(time, delta) {
         let t = this;
 
+        t.preUpdateBodies();
+        t.physics.world.step(0.001 * delta);
+
         //Bird angle
         if (t.bird.angle < 20) {
             t.bird.angle += 1;
@@ -337,6 +342,42 @@ class InGame extends Phaser.Scene {
         }
 
         t.checkPipes();
+    }
+
+    preUpdateBodies(){
+        let body;
+        let bodies = this.physics.world.bodies.entries;
+
+        for (let i = 0; i < bodies.length; i++)
+        {
+            body = bodies[i];
+
+            this.preUpdateBody(body);
+        }
+    }
+
+    preUpdateBody(body){
+        body.resetFlags();
+        body.updateBounds();
+
+        var sprite = body.transform;
+
+        body.position.x = sprite.x + sprite.scaleX * (body.offset.x - sprite.displayOriginX);
+        body.position.y = sprite.y + sprite.scaleY * (body.offset.y - sprite.displayOriginY);
+
+        body.updateCenter();
+
+        body.rotation = sprite.rotation;
+
+        body.preRotation = body.rotation;
+
+        if (body.moves)
+        {
+            body.prev.x = body.position.x;
+            body.prev.y = body.position.y;
+            body.prevFrame.x = body.position.x;
+            body.prevFrame.y = body.position.y;
+        }
     }
 
     generateAnimations() {
