@@ -1,2 +1,5 @@
 defs/
 *.ts
+node_modules/
+terser*.*
+pack*.json
