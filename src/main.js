@@ -1,3 +1,9 @@
+import Phaser from './libs/phaser.js';
+import LoadScreen from './scenes/loadscreen.js';
+import InGame from './scenes/ingame.js';
+import Menu from './scenes/menu.js';
+import GameOver from './scenes/gameover.js';
+
 function runGame(width, height) {
     var config = {
       type: Phaser.AUTO,

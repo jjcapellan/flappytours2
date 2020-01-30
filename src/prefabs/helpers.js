@@ -1,4 +1,4 @@
-let helpers = {
+export let helpers = {
     setFlex: (element) => {
         document.getElementById(element).style.display = 'flex';
     },

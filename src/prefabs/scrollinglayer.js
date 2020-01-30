@@ -1,4 +1,4 @@
-class ScrollingLayer {
+export default class ScrollingLayer {
     /**
      *Creates an instance of ScrollingLayer.
      * @param {Phaser.Scene} scene     

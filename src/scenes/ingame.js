@@ -1,4 +1,7 @@
-class InGame extends Phaser.Scene {
+import ScrollingLayer from '../prefabs/scrollinglayer';
+import {helpers} from '../prefabs/helpers';
+
+export default class InGame extends Phaser.Scene {
     constructor() {
         super('inGame');
     }

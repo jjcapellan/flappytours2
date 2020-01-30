@@ -1,4 +1,6 @@
-class GameOver extends Phaser.Scene {
+import {helpers} from '../prefabs/helpers';
+
+export default class GameOver extends Phaser.Scene {
     constructor() {
         super('gameOver');
     }

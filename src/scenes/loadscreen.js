@@ -1,4 +1,4 @@
-class LoadScreen extends Phaser.Scene {
+export default class LoadScreen extends Phaser.Scene {
     constructor() {
       super('loadScreen');
     }
@@ -26,14 +26,14 @@ class LoadScreen extends Phaser.Scene {
     t.load.on('progress', this.updateLoad, this);
 
       // Load music
-      t.load.audio('music', 'assets/sounds/music/PleasantCreekLoop.mp3');
+      t.load.audio('music', require('../../assets/sounds/music/PleasantCreekLoop.mp3'));
       // Load sounds
-      t.load.audio('crash', ['assets/sounds/suelo.wav', 'assets/sounds/suelo.mp3']);
-      t.load.audio('gameover', ['assets/sounds/gameover.mp3', 'assets/sounds/gameover.wav']);
-      t.load.audio('flap', ['assets/sounds/aleteo.wav', 'assets/sounds/aleteo.mp3']);
-      t.load.audio('point', ['assets/sounds/punto.wav', 'assets/sounds/punto.mp3']);
+      t.load.audio('crash', [require('../../assets/sounds/suelo.wav'),require('../../assets/sounds/suelo.mp3')]);
+      t.load.audio('gameover', [require('../../assets/sounds/gameover.mp3'),require('../../assets/sounds/gameover.wav')]);
+      t.load.audio('flap', [require('../../assets/sounds/aleteo.wav'),require('../../assets/sounds/aleteo.mp3')]);
+      t.load.audio('point', [require('../../assets/sounds/punto.wav'),require('../../assets/sounds/punto.mp3')]);
       // Load atlas
-      t.load.atlas(t.gbs.key_atlas, 'assets/imgs/lowres_ar133/flappy5.png', 'assets/imgs/lowres_ar133/flappy5.json');      
+      t.load.atlas(t.gbs.key_atlas, require('../../assets/imgs/lowres_ar133/flappy5.png'), require('../../assets/imgs/lowres_ar133/flappy5.json'));      
     }
 
     updateLoad(progress){

@@ -1,5 +1,6 @@
 defs/
 *.ts
 node_modules/
-terser*.*
-pack*.json
+package-lock.json
+dist/
+.cache/

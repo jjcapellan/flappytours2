@@ -1,0 +1,24 @@
+{
+  "name": "flappy2",
+  "version": "1.0.0",
+  "description": "Game based on the original idea of the famous Flappy Bird.   This game was made with [Phaser 3](https://github.com/photonstorm/phaser). Try it here: https://jjcapellan.github.io/flappytours2/",
+  "main": "index.html",
+  "scripts": {
+    "prod": "parcel build index.html --public-url ./ --no-source-maps -d docs",
+    "dev": "parcel index.html -d test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjcapellan/flappytours2.git"
+  },
+  "keywords": [],
+  "author": "jjcapellan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjcapellan/flappytours2/issues"
+  },
+  "homepage": "https://github.com/jjcapellan/flappytours2#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

@@ -1,4 +1,6 @@
-class Menu extends Phaser.Scene {
+import {helpers} from '../prefabs/helpers';
+
+export default class Menu extends Phaser.Scene {
     constructor() {
       super('menu');
     }

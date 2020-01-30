@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google" content="notranslate">
+
+  <title>Flappy Tours 2</title>
+  <link rel="shortcut icon" href="/favicon.26242483.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="/estilos.6561dcf6.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-112934282-1"></script>
+  <script>window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+  dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'UA-112934282-1', {
+  'anonymize_ip': true
+});</script>
+
+<script src="/estilos.6561dcf6.js"></script></head>
+
+<body>
+  <!-- Game container -->
+  <div id="gamediv" class="fullscreen"></div>
+
+  <!-- Loading overlay -->
+  <div id="loading" class="fullscreen flexvc txtblancosobrenegro txt5vh">
+      <img style="flex:unset;height:unset;" src="/logo.eb93dcc6.png">
+      <p id="p_loading">Loading...</p>
+      <p id="p_load"></p>
+  </div>
+
+  <!-- menu overlay -->
+  <div id="menu" class="fullscreen flexvc inithidden">
+
+  <button id="trophy">🏆</button> <!-- For future leader board-->
+      <img id="duck" class="centrado animacionUpDown" src="/background-logo.53dce9cd.png">
+    <button id="btplay" class="btn">PLAY</button>
+    <div id="botonera" class="flexhc">
+      <button id="bthelp" class="btn btn-mini">Help</button>
+      <button id="btcredits" class="btn btn-mini">Credits</button>
+    </div>
+  </div>
+
+  <!-- Ingame overlay -->
+  <div id="inGame" class="fullscreen inithidden">
+    <div class="fila1x">
+      <p id="score" class="centrado txtblancosobrenegro txt5vh">0</p>      
+    </div>
+  </div>
+
+  <!-- Gameover overlay-->
+  <div id="gameOver" class="fullscreen flexvc animacionPopUp txtblancosobrenegro inithidden">
+      <p id="p_gameover" class="txtblancosobrenegro txt5vh">GAME OVER</p>
+      <p class="txtverdesobreblanco txt4vh">SCORE</p>
+      <p id="recount" class="txt5vh"></p>
+      <p class="txtverdesobreblanco txt4vh">YOUR BEST</p>
+      <p id="bestscore" class="txt5vh"></p>
+      <p id="message" class="txtnegrosobreblanco txt4vh"></p>
+  </div>
+
+  <!-- Credits overlay -->
+  <div id="credits" class="fullscreen flexvc inithidden" style="background-color:#00b698; text-align:center;">
+      <h2>DEVELOPED BY</h2>
+      <p>Juan Jos&eacute Capell&aacuten
+        <br>soycape@hotmail.com
+        <br>
+      </p>
+      <h2>ATTRIBUTIONS</h2>
+
+      <p>Backgroung music "Pleasant Creek" by Matthew Pablo.
+        <!--(<a href="https://opengameart.org/users/matthewpablo" target="_blank">Source</a>)-->
+        <br> License:
+        <!--<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">-->CC-BY-3.0</p>
+      <p>Bird character (Flappy Duck sprite) by
+        <!--<a href="https://bevouliin.com/" target="_blank">-->bevouliin.com.
+        <br> License:
+        <!--<a href="http://static.opengameart.org/OGA-BY-3.0.txt" target="_blank">-->OGA-BY-3.0</p>
+      <p>Powered by
+        <!--<a href="http://phaser.io" target="_blank">-->Phaser.io</p>
+  </div>
+
+<!-- Help overlay -->
+  <div id="help" class="fullscreen flexvc inithidden">      
+      <h2 id="title_instrucciones" class="txtblancosobrenegro txt5vh">HOW TO PLAY</h2>
+      <p id="instrucciones">Help Flappy avoid the obstacles. How far can you go?</p>
+      <img src="/ayudaflappy.2ca1eb1d.png">
+  </div>
+
+  
+  <!--<script src="src/libs/phaser.min.js"></script>-->
+  <script src="/main.1e43358e.js"></script>
+</body>
+
+</html>
